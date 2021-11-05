@@ -49,7 +49,7 @@ let posts = [
         "userPicture" : "https://unsplash.it/300/300?image=27",
         "postDate" : "31/01/21",
         "postText" : "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
-        "postImage" : false,
+        "postImage" : "''",
         "likes" : 27
     },
 
@@ -64,6 +64,7 @@ let posts = [
 ]
 
 printPosts ();
+
 
 let likeBtn = document.querySelectorAll(".js-like-button");
 console.log(likeBtn);
@@ -94,18 +95,13 @@ function printPosts (){
 
         let {userName, userPicture, postDate, postText, likes, postImage} = indexPosts;
         
-        printInHtml(userName, userPicture, postDate, postText, likes, i);
-        let postImageContainer = document.querySelectorAll(".post__image")[i];
-
-        if (postImage !== false){
-            postImageContainer.innerHTML = `<img src= ${postImage} alt=""></img>`;
-        }
-
+        printInHtml(userName, userPicture, postDate, postText, likes, i, postImage);
+        console.log(postImage);
     }
 }
 
 
-function printInHtml(userName, userPicture, postDate, postText, likes, indexLikes){
+function printInHtml(userName, userPicture, postDate, postText, likes, indexLikes, postImage){
     postsContainer.innerHTML += `
 
         <div class="post">
@@ -122,7 +118,7 @@ function printInHtml(userName, userPicture, postDate, postText, likes, indexLike
             </div>
             <div class="post__text">${postText}</div>
             <div class="post__image">
-                
+                <img src=${postImage} alt=""></img>
             </div>
             <div class="post__footer">
                 <div class="likes js-likes">
