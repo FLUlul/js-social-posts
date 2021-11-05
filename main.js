@@ -45,32 +45,67 @@ let posts = [
     },
 
     {
-        "userName" : "Flu Ido",
+        "userName" : "FluIdo",
         "userPicture" : "https://unsplash.it/300/300?image=27",
         "postDate" : "31/01/21",
         "postText" : "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         "postImage" : false,
         "likes" : 27
+    },
+
+    {
+        "userName" : "Metallo",
+        "userPicture" : "https://unsplash.it/300/300?image=47",
+        "postDate" : "31/01/21",
+        "postText" : "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
+        "postImage" : "https://unsplash.it/300/300?image=52",
+        "likes" : 97
     }
 ]
 
-for (let i = 0; i < posts.length; i++){
-    let indexPosts = posts[i];
+printPosts ();
 
-    const {userName, userPicture, postDate, postText, likes, postImage} = indexPosts;
-       
-    printInHtml(userName, userPicture, postDate, postText, likes);
-    let postImageContainer = document.querySelector(".post__image");
+let likeBtn = document.querySelectorAll(".js-like-button");
+console.log(likeBtn);
 
-    if (postImage !== false){
-        postImageContainer.innerHTML = `<img src= ${postImage} alt=""></img>`;
+for(let i = 0; i < likeBtn.length; i++){
+
+    likeBtn[i].addEventListener("click",
+    function(){
+        let indexLikes = posts[i].likes;
+
+        let addLike = indexLikes+1;
+
+        indexLikes = addLike;
+
+        let likeCounter = document.querySelectorAll(".likes__counter")[i];
+
+        likeCounter.innerHTML = `
+        Piace a <b id="like-counter-" class="js-likes-counter">${index0likes}</b> persone`;
     }
-
-    /*console.log(userName, userPicture, postDate, postText, likes, postImage); */
+    );
 }
 
 
-function printInHtml(userName, userPicture, postDate, postText, likes){
+
+function printPosts (){
+    for (let i = 0; i < posts.length; i++){
+        let indexPosts = posts[i];
+
+        let {userName, userPicture, postDate, postText, likes, postImage} = indexPosts;
+        
+        printInHtml(userName, userPicture, postDate, postText, likes, i);
+        let postImageContainer = document.querySelectorAll(".post__image")[i];
+
+        if (postImage !== false){
+            postImageContainer.innerHTML = `<img src= ${postImage} alt=""></img>`;
+        }
+
+    }
+}
+
+
+function printInHtml(userName, userPicture, postDate, postText, likes, indexLikes){
     postsContainer.innerHTML += `
 
         <div class="post">
@@ -92,13 +127,13 @@ function printInHtml(userName, userPicture, postDate, postText, likes){
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button" href="#" data-postid="${indexLikes}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                        Piace a <b id="like-counter-${indexLikes}" class="js-likes-counter">${likes}</b> persone
                     </div>
                 </div> 
             </div>            
