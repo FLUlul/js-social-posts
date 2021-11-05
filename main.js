@@ -66,23 +66,30 @@ let posts = [
 printPosts ();
 
 
-let likeBtn = document.querySelectorAll(".js-like-button");
-console.log(likeBtn);
+let likeBtns = document.querySelectorAll(".js-like-button");
+let likeCounter = document.querySelectorAll(".js-likes-counter");
+console.log(likeBtns);
 
-for(let i = 0; i < likeBtn.length; i++){
+for(let i = 0; i < likeBtns.length; i++){
 
-    likeBtn[i].addEventListener("click",
+    likeBtns[i].addEventListener("click",
+
     function(){
         let indexLikes = posts[i].likes;
+        if(this.className.includes("like-button--liked")){ 
 
-        let addLike = indexLikes+1;
+            likeBtns[i].classList.remove("like-button--liked");
 
-        indexLikes = addLike;
+            likeCounter[i].innerHTML = indexLikes;
 
-        let likeCounter = document.querySelectorAll(".likes__counter")[i];
+        }else{
+            indexLikes += 1;
 
-        likeCounter.innerHTML = `
-        Piace a <b id="like-counter-" class="js-likes-counter">${indexLikes}</b> persone`;
+            likeCounter[i].innerHTML = indexLikes;
+    
+            likeBtns[i].classList.add("like-button--liked");
+        }
+
     }
     );
 }
@@ -123,7 +130,7 @@ function printInHtml(userName, userPicture, postDate, postText, likes, indexLike
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="${indexLikes}">
+                        <a class="like-button  js-like-button" data-postid="${indexLikes}">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
