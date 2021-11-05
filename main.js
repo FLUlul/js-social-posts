@@ -82,7 +82,7 @@ for(let i = 0; i < likeBtn.length; i++){
         let likeCounter = document.querySelectorAll(".likes__counter")[i];
 
         likeCounter.innerHTML = `
-        Piace a <b id="like-counter-" class="js-likes-counter">${index0likes}</b> persone`;
+        Piace a <b id="like-counter-" class="js-likes-counter">${indexLikes}</b> persone`;
     }
     );
 }
